@@ -1,0 +1,84 @@
+q1
+
+mysql> select employee_first_name,employee_salary_table.employee_salary from employee_details_table JOIN employee_salary_table ON employee_salary_table.employee_id=employee_details_table.employee_id where employee_salary>'50k';
++---------------------+-----------------+
+| employee_first_name | employee_salary |
++---------------------+-----------------+
+| John                | 60K             |
+| Tyrion              | 85K             |
++---------------------+-----------------+
+2 rows in set (0.00 sec)
+
+
+q2
+
+
+mysql> select employee_last_name,graduation_percentile from employee_details_table as edt
+    -> where graduation_percentile>'70%';
++--------------------+-----------------------+
+| employee_last_name | graduation_percentile |
++--------------------+-----------------------+
+| Targaryen          | 88%                   |
+| Lannister          | 72%                   |
++--------------------+-----------------------+
+2 rows in set (0.00 sec)
+
+
+q3
+
+mysql> select edt.graduation_percentile,employee_code from employee_salary_table as est JOIN employee_details_table edt
+ON est.employee_id=edt.employee_id WHERE edt.graduation_percentile<'70%';
++-----------------------+---------------+
+| graduation_percentile | employee_code |
++-----------------------+---------------+
+| 60%                   | su_john       |
+| 64%                   | su_tyrion     |
++-----------------------+---------------+
+2 rows in set (0.00 sec)
+
+
+q4
+
+mysql> select edt.employee_first_name,edt.employee_last_name,employee_domain from employee_code_table as ect JOIN employee_salary_table as est ON ect.employee_
++---------------------+--------------------+-----------------+
+| employee_first_name | employee_last_name | employee_domain |
++---------------------+--------------------+-----------------+
+| Daenerys            | Targaryen          | PHP             |
+| Tyrion              | Lannister          | Angular JS      |
++---------------------+--------------------+-----------------+
+2 rows in set (0.00 sec)
+
+
+q5
+
+mysql> select sum(employee_salary),ect.employee_domain from employee_salary_table as est
+    -> JOIN employee_code_table as ect ON ect.employee_code=est.employee_code
+    -> group by ect.employee_domain;
++----------------------+-----------------+
+| sum(employee_salary) | employee_domain |
++----------------------+-----------------+
+|                  104 | Java            |
+|                   25 | PHP             |
+|                   85 | Angular JS      |
++----------------------+-----------------+
+3 rows in set, 4 warnings (0.00 sec)
+
+
+q6
+
+mysql> select sum(employee_salary),ect.employee_domain from employee_salary_table as est JOIN employee_code_table as ect ON ect.employee_code=est.employee_code group by ect.employee_domain having sum(employee_salary)<'30';
++----------------------+-----------------+
+| sum(employee_salary) | employee_domain |
++----------------------+-----------------+
+|                   25 | PHP             |
++----------------------+-----------------+
+1 row in set, 8 warnings (0.00 sec)
+
+
+q7
+
+mysql> select employee_id from employee_salary_table est
+    -> where employee_code IS NULL;
+Empty set (0.00 sec)
+
+

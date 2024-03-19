@@ -1,0 +1,64 @@
+TASK 1
+
+The objective of this task is to create a database structure for IPL fixture and results for next year. We have to store the following data in the database:
+Venue of match
+Date of match
+Team 1 name
+Team 2 name
+Captain of team 1
+Captain of team 2
+Toss won by
+Match won by
+
+For this task we will proceed with the following steps:
+Firstly I will create a database names 'sqltasks' using command 
+
+CREATE DATABASE sqltasks;
+
+This command will create a database with name sqltasks.
+Now since the database has been created we need to start using the database.
+For this we will use the command 
+
+USE sqltasks;
+
+Now since in the database we need to create a fixture
+so we will create tables
+here we will create a table that contain all the match detals like venue, date , team 1 and team 2 name , captains of team1 and team2.
+Also we will create another table that contains the result of match and winner of toss.
+Also both the tables have a common entry as match_id which will be used as a primary key.
+For this following commands will be used:
+
+Create table table1(
+match_id int primary key,
+venue varchar[20] ,
+date date,
+team1 varchar[20],
+team2 varchar[20],
+capt_team1 varchar[20],
+capt_team2 varchar[20]
+);
+
+Create table table2(
+match_id int primary key,
+winner_toss varchar[20],
+winner_match varchar[20]
+);
+
+We can enter dummy values in this aswell like
+
++----------+-----------+----------+------------+------------+------------+
+| match_id | team1     | team2    | capt_team1 | capt_team2 | date       |
++----------+-----------+----------+------------+------------+------------+
+|        1 | rajasthan | mumbai   | A          | B          | 2024-01-01 |
+|        2 | delhi     | banglore | C          | D          | 2024-01-02 |
+|        3 | chennai   | gujrat   | E          | F          | 2024-01-03 |
++----------+-----------+----------+------------+------------+------------+
+
+
+pros:
+1. This is a simple way of representing complex data.
+2. This divides the match details and result in different tables so as to maintain isolation of tables.
+
+cons:
+1. The table can be futher more reduced by creating 3 tables instead of 2.
+2. The table could have been more simple.
